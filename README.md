@@ -1,5 +1,7 @@
 # Mirrorkin UI
 
+**Live preview:** https://leex0x0.github.io/mirrorkin-ui/
+
 Mirrorkin is a tiny AI twin that earns while you live your life — it chats like you, scouts
 gigs and bounties, runs a liquidation/trading scanner across multiple chains, and reports back
 real earnings.
@@ -67,23 +69,37 @@ npm run build
 npm run preview   # serve the production build locally to sanity-check it
 ```
 
-Build and dev server have both been verified to run with **no errors** as of this commit
+Build and dev server have both been verified to run with **no errors**
 (`npm run build` succeeds, `npm run dev` serves the app, `npx oxlint src` reports 0 errors).
+
+## Deployment
+
+Deployed as a static site to **GitHub Pages** from the `gh-pages` branch (built with
+`npx gh-pages -d dist`). Live at:
+
+https://leex0x0.github.io/mirrorkin-ui/
+
+Note: Vite's `base` is set to `/mirrorkin-ui/` in `vite.config.js` to match the GitHub Pages
+subpath — if you fork/rename this repo or move it to a custom domain/root deploy (e.g. Vercel,
+Netlify), change `base` back to `/` first.
+
+Signing up for Vercel/Netlify from an automated session hit bot-detection/CAPTCHA walls, so
+GitHub Pages was used instead since it needed no new account. Moving to Vercel/Netlify later
+(manual signup, then "Import Git Repository") would give preview-per-PR deploys, which is a
+nice upgrade but not required for this static UI.
 
 ## Current status
 
 - ✅ UI only — no backend, no live data, no auth.
 - ✅ All dashboard data is mocked in `src/data/mockData.js`.
 - ✅ Builds and runs cleanly (`npm run dev` / `npm run build` both verified).
+- ✅ Deployed and live at https://leex0x0.github.io/mirrorkin-ui/
 - ⬜ Not yet wired to a real chat/LLM backend.
 - ⬜ Not yet wired to a real Scout (gig/bounty finder) or Earnings backend.
-- ⬜ Not yet deployed to a live hosting URL — deploying to Vercel or Netlify (free tier) is the
-  natural next step once this UI is reviewed. If you've got a Vercel/Netlify account, this repo
-  can be imported as-is (framework preset: Vite) with zero config changes needed.
 
 ## Next steps
 
-1. Deploy this repo to Vercel/Netlify for a live preview link.
+1. (Optional) Move hosting to Vercel/Netlify for preview-per-PR deploys once an account exists.
 2. Build a small backend (Node/Express or serverless functions) exposing `/chat`,
    `/scout-finds`, and `/earnings` endpoints.
 3. Swap the mock data imports in `ChatPanel`, `ScoutPanel`, and `EarningsPanel` for real API
